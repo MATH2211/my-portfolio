@@ -1,66 +1,94 @@
-import { Container, Grid, styled, Typography } from "@mui/material"
-import Avatar from "../../../../assets/images/avatar.jpg"
-import DownloadIcon from '@mui/icons-material/Download';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { Box, Container, Grid, styled, Typography } from "@mui/material";
+import DownloadIcon from "@mui/icons-material/Download";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import StyledButton from "../../../../components/StyledButton/StyledButton";
+import { AnimatedBackground } from "../../../../components/AnimationComponent/AnimatedBackground";
+import Avatar from "../../../../assets/images/avatar.jpg";
 
+const StyledHero = styled("div")(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  height: "100vh",
+  display: "flex",
+  alignItems: "center",
+}));
 
+const StyledImg = styled("img")(({ theme }) => ({
+  width: "300px",
+  height: "300px",
+  borderRadius: "50%",
+  objectFit: "cover",
+  border: `2px solid ${theme.palette.primary.contrastText}`,
+  zIndex: 1,
+}));
 
 function Hero() {
-
-    const StyledHero = styled("div")(()=> ({
-        background: "black",
-        height: "100vh"
-    }))
-
-    const StyledImg = styled("img")(() => ({
-      width: "300px", // Defina uma largura fixa (ajuste conforme necessário)
-      height: "300px", // Defina a altura igual à largura
-      borderRadius: "50%", // Para torná-la redonda
-      objectFit: "cover", // Para garantir que a imagem cubra o círculo sem distorcer
-
-      }));
-      
-
-
-
   return (
-    <>
-      <StyledHero>
+    <StyledHero>
+      <Container maxWidth="lg">
+        <Grid container spacing={4} alignItems="center">
+          <Grid item xs={12} md={5} sx={{ display: "flex", justifyContent: "center" }}>
 
-        <Container maxWidth="lg">
-          <Grid container spacing={2}>
-            <Grid size={{ xs: 12, md: 4}} sx={{ display: 'flex', justifyContent: 'center' }}>
-                <StyledImg src={Avatar}/>
-            </Grid>
-            <Grid size={{ xs: 12, md: 8}}>
-                <Typography color="primary" variant="h1" textAlign={"center"}>Matheus Felipe</Typography>
-                <Typography color="primary" variant="h2" textAlign={"center"}>I'm a Data Science</Typography>
+            <Box position="relative">
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: -100,
+                  right: 0,
+                  width: "150%",
+                  height: 600,
+                  zIndex: 0,
+                }}
+              >
+                <AnimatedBackground />
+              </Box>
+              <Box position="relative">
+                <StyledImg src={Avatar} alt="Avatar" />
+              </Box>
 
-                <Grid container display={"flex"} justifyContent={"center"}>
-                  <Grid size={{ xs: 12, md: 4}} display={"flex"} justifyContent={"center"}>
-                    <button>
-                  <DownloadIcon/>
-                  Download CV</button>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 4}} display={"flex"} justifyContent={"center"}>
-                    <button>
-                  <MailOutlineIcon/>
-                  Contact me</button>
-                  </Grid>
-                  
-                  </Grid>                  
-                
+
+            </Box>
+
+            
+          </Grid>
+
+          <Grid item xs={12} md={7} textAlign="center">
+            <Typography
+              color="primary.contrastText"
+              variant="h1"
+              pb={2}
+            >
+              Matheus Felipe
+            </Typography>
+            <Typography
+
+              color="primary.contrastText"
+              textAlign="center"
+              variant="h2"
               
-            </Grid>
-         </Grid>
-        </Container>
-        
 
-        
-      </StyledHero>
-       
-    </>
-  )
+            >
+              I'm a Data Scientist
+            </Typography>
+
+            <Grid container spacing={2} justifyContent="center" mt={3} spacing={2}>
+              <Grid item xs={12} sm={6} md={4}>
+                <StyledButton fullWidth>
+                  <DownloadIcon />
+                  <Typography ml={1}>Download CV</Typography>
+                </StyledButton>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <StyledButton fullWidth>
+                  <MailOutlineIcon />
+                  <Typography ml={1}>Contact Me</Typography>
+                </StyledButton>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
+    </StyledHero>
+  );
 }
 
-export default Hero
+export default Hero;
